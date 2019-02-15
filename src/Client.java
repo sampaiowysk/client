@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 
-//import org.apache.http.impl.client.DefaultHttpClient;
-
 public class Client{
 
     public void CriarBiblioteca () throws ClientProtocolException, IOException {
@@ -39,14 +37,9 @@ public class Client{
     }
 
     public void BuscaLivro (int id) throws ClientProtocolException, IOException, URISyntaxException {
-//        URIBuilder builder = new URIBuilder("http://localhost:8080/book");
-//        builder.setParameter("parts", "all").setParameter("action", "finish");
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet("http://localhost:8080/book/"+id);
-
-        /*URI uri = new URIBuilder(request.getURI()).addParameter("bookId", Integer.toString(id)).build();
-        ((HttpRequestBase) request).setURI(uri);*/
 
         HttpResponse response = client.execute(request);
 
@@ -62,7 +55,6 @@ public class Client{
         HttpPost post = new HttpPost("http://localhost:8080/book");
 
         String json = "{\"id\": 1,\"title\": \"title\",\"author\": \"author\",\"desc\": \"desc\"}";
-        //System.out.println(json);
         StringEntity params = new StringEntity(json);
         post.setEntity(params);
         post.setHeader("Content-type", "application/json");
@@ -81,7 +73,6 @@ public class Client{
         HttpPost post = new HttpPost("http://localhost:8080/book");
 
         String json = "{\"id\": 1,\"title\": \""+title+"\",\"author\": \""+autor+"\",\"desc\": \""+desc+"\"}";
-        //System.out.println(json);
         StringEntity params = new StringEntity(json);
         post.setEntity(params);
         post.setHeader("Content-type", "application/json");
